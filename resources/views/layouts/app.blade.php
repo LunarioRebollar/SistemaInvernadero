@@ -45,9 +45,7 @@
        <footer class="app-footer">
         <center>
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <span>&copy; 2021 
-                    <a href="https://github.com/LunarioRebollar" target="_blank">Invernadero Los Lira</a>
-                </span>
+                    <center>&copy; 2021 <a href="https://github.com/LunarioRebollar" target="_blank">Invernadero Los Lira</a></center>
             </div>
         </center>
         </footer>
