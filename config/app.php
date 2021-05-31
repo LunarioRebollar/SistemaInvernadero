@@ -123,6 +123,10 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'slack_webhook'=>env('SLACK_HOOK'),
+
+    'discord_webhook'=>env('DISCORD_HOOK'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

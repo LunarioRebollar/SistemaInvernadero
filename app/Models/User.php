@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\NewUserRegistered;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -17,14 +18,16 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory;
     use HasProfilePhoto;
     use HasTeams;
-    use Notifiable;
     use TwoFactorAuthenticatable;
+    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+   protected static function boot(){
+       parent::boot();
+       self::created(function($model){
+           $model->notify(new NewUserRegistered());
+       });
+   }
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -35,10 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        'password', 'remember_token',
     ];
 
     /**
@@ -58,5 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+    
+    public function routeNotificationForSlack($notification)
+    {
+        return config('app.slack_webhook');
+    }
 
+    public function routeNotificationForDiscord($notification)
+    {
+        return config('app.discord_webhook');
+    }
 }

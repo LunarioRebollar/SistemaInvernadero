@@ -13,4 +13,4 @@ class ArduinoController extends Controller
         $datos=DB::table('sensors')->paginate(15);
         return view ("tabla.index",['datos'=>$datos]);
     }
-}
+}       
