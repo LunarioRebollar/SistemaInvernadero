@@ -15,4 +15,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get("index",[\App\Http\Controllers\ArduinoController::class,'showIndex'])->name("index");
     Route::get('notification', 'DiscordNotification@notification'); 
+    Route::get("grafica1",[\App\Http\Controllers\ArduinoController::class,'showGraphic1'])->name("grafica1");
 });

@@ -15,8 +15,11 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Los Lira') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ url('/index') }}">
+                    <x-jet-nav-link href="{{ route('index') }}">
                         {{ __('Datos Históricos') }}
+                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('grafica1') }}">
+                        {{ __('Gráfica Temperatura') }}
                     </x-jet-nav-link>
                 </div>
             </div>
