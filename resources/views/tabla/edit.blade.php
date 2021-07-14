@@ -4,41 +4,29 @@
 </style>
 <x-app-layout>
 <center><h1>Datos Históricos</h1></center>
-    <div class="py-12">
-        <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8">
-            <div class="bg-withe overflow-hidden shadow-xl sm:rounded-lg">
-            <center>
-                <div class="datagrid">
-                    <table>
-                        <thead>
-                            <th colspan="2"><center>Temperatura</center></th>
-                            <th colspan="2"><center>Proximidad</center></th>
-                            <th colspan="2"><center>Presión</center></th>
-                            <th colspan="2"><center>Húmedad</center></th>
-                            <th colspan="2"><center>Fecha de registro</center></th>
-                            <th colspan=""><center>Acciones</center></th>
-                        </thead>
-                        @foreach($datos as $d)
-                        <tr>
-                            <td colspan="2"><center>{{$d->temperature}}°C</center></td>
-                            <td colspan="2"><center>{{$d->proximity}} cm</center></td>
-                            <td colspan="2"><center>{{$d->pressure}} lúmenes</center></td>
-                            <td colspan="2"><center>{{$d->humidity}} %</center></td>
-                            <td colspan="2"><center>{{$d->fecha_hora}}</center></td>
-                            <td colspan="2">
-                                <center>
-                                        <a href="" class="btn btn-success">Ver</a>
-                                        <a href="" class="btn btn-primary">Editar</a>
-                                        <a href="" class="btn btn-danger">Eliminar</a>
-                                </center>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>    
+<form action="{{ url('/tabla/'.$d->id) }}" method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    {{ method_field('PATCH') }}
+    <div class="form-row">
+                <div class="form-group col-md-4">
+                      <label for="temprature">Temperatura:</label>
+                      <input name="temprature" type="text" class="form-control" id="temprature" placeholder="Temperatura" value="{{$d->temperature}}">
                 </div>
-            </div>
-        </div>
-        {{ $datos->links() }}
-        </center>
-    </div>
+                <div class="form-group col-md-4">
+                      <label for="proximity">Proximidad:</label>
+                      <input name="proximity" type="text" class="form-control" id="proximity" placeholder="Proximidad" value="{{$d->proximity}}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="txtApMaterno">Apellido Materno:</label>
+                    <input name="ap_materno" type="text" class="form-control" id="txtApPaterno" placeholder="Apellido Materno" value="{{$directores->ap_materno}}">
+                  </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                      
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-primary" href="{{ url('Directores')}}"> Cancelar</a>
+                  </div>
+              </div>
+    </form>
 </x-app-layout>
